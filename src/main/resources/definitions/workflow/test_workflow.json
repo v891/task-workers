@@ -1,0 +1,55 @@
+{
+  "createTime": 1680640770011,
+  "updateTime": 1680715235510,
+  "accessPolicy": {},
+  "name": "test_workflow",
+  "description": "Test dynamic tasks",
+  "version": 3,
+  "tasks": [
+    {
+      "name": "create_dynamic_tasks",
+      "taskReferenceName": "create_dynamic_tasks_ref",
+      "inputParameters": {
+        "numberOfTasks": "${workflow.input.numberOfTasks}"
+      },
+      "type": "SIMPLE",
+      "startDelay": 0,
+      "optional": false,
+      "asyncComplete": false
+    },
+    {
+      "name": "test_dynamic_tasks",
+      "taskReferenceName": "test_dynamic_tasks_ref",
+      "inputParameters": {
+        "dynamicTasks": "${create_dynamic_tasks_ref.output.dynamicTasksJSON}",
+        "dynamicTasksInput": "${create_dynamic_tasks_ref.output.dynamicTasksInputJSON}"
+      },
+      "type": "FORK_JOIN_DYNAMIC",
+      "dynamicForkTasksParam": "dynamicTasks",
+      "dynamicForkTasksInputParamName": "dynamicTasksInput",
+      "startDelay": 0,
+      "optional": false,
+      "asyncComplete": false
+    },
+    {
+      "name": "test_join_task",
+      "taskReferenceName": "test_join_task_ref",
+      "inputParameters": {},
+      "type": "JOIN",
+      "startDelay": 0,
+      "optional": false,
+      "asyncComplete": false
+    }
+  ],
+  "inputParameters": [],
+  "outputParameters": {},
+  "failureWorkflow": "local_failure_notify",
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": true,
+  "ownerEmail": "watch@myworkflow.com",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {}
+}

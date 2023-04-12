@@ -1,0 +1,33 @@
+{
+  "createTime": 1680641045181,
+  "updateTime": 1668617274984,
+  "accessPolicy": {},
+  "name": "wf_log_input_square",
+  "description": "log given number square",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "task_log_input_square",
+      "taskReferenceName": "task_log_input_square_ref",
+      "inputParameters": {
+        "givenNumber": "${workflow.input.givenNumber}"
+      },
+      "type": "SIMPLE",
+      "startDelay": 0,
+      "optional": false,
+      "asyncComplete": false
+    }
+  ],
+  "inputParameters": [],
+  "outputParameters": {
+    "square": "${task_log_input_square_ref.output.square}"
+  },
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": true,
+  "ownerEmail": "watch@myworkflow.com",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {}
+}
